@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-App Hub</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navigation" class="nav-hidden">
+        <button id="backBtn" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to Home
+        </button>
+    </nav>
+
+    <!-- Home Page -->
+    <div id="homePage" class="page active">
+        <div class="container">
+            <header class="hero">
+                <h1>Welcome to Multi-App Hub</h1>
+                <p>Choose your adventure! Test your knowledge, get a good laugh, or check the weather.</p>
+            </header>
+
+            <div class="app-grid">
+                <div class="app-card quiz-card" data-app="quiz">
+                    <div class="app-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Quiz Challenge</h3>
+                    <p>Test your knowledge with our interactive quiz</p>
+                    <button class="app-btn">Start Quiz</button>
+                </div>
+
+                <div class="app-card joke-card" data-app="joke">
+                    <div class="app-icon">
+                        <i class="fas fa-laugh"></i>
+                    </div>
+                    <h3>Joke Generator</h3>
+                    <p>Get random jokes to brighten your day</p>
+                    <button class="app-btn joke-btn">Get Jokes</button>
+                </div>
+
+                <div class="app-card weather-card" data-app="weather">
+                    <div class="app-icon">
+                        <i class="fas fa-cloud-sun"></i>
+                    </div>
+                    <h3>Weather Check</h3>
+                    <p>Get current weather for any location</p>
+                    <button class="app-btn weather-btn">Check Weather</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quiz App -->
+    <div id="quizPage" class="page">
+        <div class="container">
+            <div class="quiz-container">
+                <div class="quiz-header">
+                    <div class="quiz-info">
+                        <span id="questionNumber">Question 1 of 5</span>
+                        <span id="scoreDisplay">Score: 0</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div id="progressFill" class="progress-fill"></div>
+                    </div>
+                </div>
+
+                <div id="quizContent" class="quiz-content">
+                    <div class="question-card">
+                        <h2 id="questionText">Loading question...</h2>
+                        <div id="optionsContainer" class="options-container">
+                            <!-- Options will be inserted here -->
+                        </div>
+                        <button id="nextBtn" class="next-btn" disabled>Next Question</button>
+                    </div>
+                </div>
+
+                <div id="quizResults" class="quiz-results hidden">
+                    <div class="results-card">
+                        <h2>Quiz Completed!</h2>
+                        <div class="final-score">
+                            <span id="finalScore">0/5</span>
+                        </div>
+                        <p id="scoreMessage">Keep practicing! 💪</p>
+                        <button id="restartBtn" class="restart-btn">
+                            <i class="fas fa-redo"></i>
+                            Try Again
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Joke App -->
+    <div id="jokePage" class="page">
+        <div class="container">
+            <div class="joke-container">
+                <div class="joke-header">
+                    <h2><i class="fas fa-laugh"></i> Joke Generator</h2>
+                </div>
+
+                <div class="joke-controls">
+                    <div class="category-select">
+                        <label for="jokeCategory">Choose Category:</label>
+                        <select id="jokeCategory">
+                            <option value="Any">Any</option>
+                            <option value="Programming">Programming</option>
+                            <option value="Miscellaneous">Miscellaneous</option>
+                            <option value="Pun">Pun</option>
+                            <option value="Spooky">Spooky</option>
+                            <option value="Christmas">Christmas</option>
+                        </select>
+                    </div>
+                    <button id="getJokeBtn" class="get-joke-btn">
+                        <i class="fas fa-sync-alt"></i>
+                        Get New Joke
+                    </button>
+                </div>
+
+                <div id="jokeDisplay" class="joke-display">
+                    <div class="joke-placeholder">
+                        <i class="fas fa-laugh"></i>
+                        <p>Click the button above to get your first joke!</p>
+                    </div>
+                </div>
+
+                <div id="jokeCard" class="joke-card hidden">
+                    <div class="joke-category"></div>
+                    <div class="joke-content">
+                        <div id="jokeSetup" class="joke-setup"></div>
+                        <div id="jokePunchline" class="joke-punchline hidden"></div>
+                        <button id="showPunchlineBtn" class="show-punchline-btn hidden">
+                            Show Punchline 🥁
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Weather App -->
+    <div id="weatherPage" class="page">
+        <div class="container">
+            <div class="weather-container">
+                <div class="weather-header">
+                    <h2><i class="fas fa-thermometer-half"></i> Weather Check</h2>
+                </div>
+
+                <form id="weatherForm" class="weather-form">
+                    <div class="input-group">
+                        <label for="cityInput">Enter City Name:</label>
+                        <div class="input-with-btn">
+                            <input type="text" id="cityInput" placeholder="e.g., London, New York, Tokyo" required>
+                            <button type="submit" id="searchBtn">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <div id="weatherError" class="weather-error hidden"></div>
+
+                <div id="weatherDisplay" class="weather-display">
+                    <div class="weather-placeholder">
+                        <i class="fas fa-thermometer-half"></i>
+                        <p>Enter a city name to get current weather information</p>
+                    </div>
+                </div>
+
+                <div id="weatherCard" class="weather-card hidden">
+                    <div class="weather-main">
+                        <div class="location">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span id="locationName">Loading...</span>
+                        </div>
+                        <div class="temperature" id="temperature">--°C</div>
+                        <div class="description" id="weatherDescription">Loading...</div>
+                        <div class="feels-like">Feels like <span id="feelsLike">--</span>°C</div>
+                    </div>
+
+                    <div class="weather-details">
+                        <div class="detail-item">
+                            <i class="fas fa-tint"></i>
+                            <div class="detail-value" id="humidity">--%</div>
+                            <div class="detail-label">Humidity</div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-wind"></i>
+                            <div class="detail-value" id="windSpeed">-- km/h</div>
+                            <div class="detail-label">Wind Speed</div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-eye"></i>
+                            <div class="detail-value" id="visibility">-- km</div>
+                            <div class="detail-label">Visibility</div>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-gauge-high"></i>
+                            <div class="detail-value" id="pressure">-- hPa</div>
+                            <div class="detail-label">Pressure</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay hidden">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p id="loadingText">Loading...</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
